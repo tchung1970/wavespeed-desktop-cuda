@@ -33,8 +33,9 @@ Download the latest binaries from [Releases](https://github.com/tchung1970/waves
 
 ## Installation
 
-1. Download binaries from Releases
-2. Copy to WaveSpeed Desktop sd-bin directory:
+1. Install WaveSpeed-Desktop-linux-amd64.deb from Releases
+2. Download binaries (sd-cli, sd-server) from Releases
+3. Copy to WaveSpeed Desktop sd-bin directory:
 
 ```bash
 mkdir -p ~/.config/wavespeed-desktop/sd-bin
