@@ -10,9 +10,6 @@ Changes made by tchung1970
    Solution:
    - build/linux/after-install.sh: Creates wrapper script at /usr/bin/wavespeed-desktop
      that launches binary with --no-sandbox
-   - build/linux/after-install.sh: Fixes desktop file Exec= line to use wrapper script
-     (electron-builder generates incorrect Exec path)
-   - build/linux/after-install.sh: Updates icon cache after installation
    - package.json: Removed AppImage target (deb only)
 
 2. Fix libstable-diffusion.so not found
@@ -51,6 +48,21 @@ Changes made by tchung1970
    - src/i18n/locales/*.json (all 18 files): Renamed key and updated message to:
      "Z-Image uses GPU acceleration when available (CUDA on Linux, Metal on macOS,
      Vulkan on Windows)."
+
+5. Fix Application Launcher (desktop icon) not working
+
+   Problem: Clicking WaveSpeed Desktop in the application menu did nothing.
+
+   Cause: electron-builder generates desktop file with Exec= pointing directly to
+   /opt/WaveSpeed Desktop/wavespeed-desktop (without --no-sandbox), and adding
+   desktop.exec in package.json creates an invalid lowercase exec= line instead
+   of replacing the Exec= line.
+
+   Solution:
+   - build/linux/after-install.sh: Fixes desktop file Exec= line to use wrapper script
+   - build/linux/after-install.sh: Removes invalid lowercase exec= line if present
+   - build/linux/after-install.sh: Updates icon cache after installation
+   - package.json: Removed desktop.exec (after-install.sh handles this instead)
 
 ---
 
