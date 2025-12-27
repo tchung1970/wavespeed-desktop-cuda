@@ -10,8 +10,10 @@ Changes made by tchung1970
    Solution:
    - build/linux/after-install.sh: Creates wrapper script at /usr/bin/wavespeed-desktop
      that launches binary with --no-sandbox
-   - package.json: Added desktop.exec with --no-sandbox for GUI launches,
-     removed AppImage target (deb only)
+   - build/linux/after-install.sh: Fixes desktop file Exec= line to use wrapper script
+     (electron-builder generates incorrect Exec path)
+   - build/linux/after-install.sh: Updates icon cache after installation
+   - package.json: Removed AppImage target (deb only)
 
 2. Fix libstable-diffusion.so not found
 

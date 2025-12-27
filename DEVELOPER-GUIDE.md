@@ -23,7 +23,7 @@ Solution:
 Files to modify:
 
   1. build/linux/after-install.sh
-     Replace the symlink creation with a wrapper script:
+     Replace the symlink creation with a wrapper script that also fixes the desktop file:
 
      #!/bin/bash
 
@@ -35,6 +35,15 @@ Files to modify:
      EOF
      chmod +x '/usr/bin/${executable}'
 
+     # Fix desktop file to use wrapper script (electron-builder adds invalid lowercase exec=)
+     DESKTOP_FILE='/usr/share/applications/${executable}.desktop'
+     if [ -f "$DESKTOP_FILE" ]; then
+         # Replace Exec= line to use wrapper script
+         sed -i 's|^Exec=.*|Exec=/usr/bin/${executable} %U|' "$DESKTOP_FILE"
+         # Remove invalid lowercase exec= line if present
+         sed -i '/^exec=/d' "$DESKTOP_FILE"
+     fi
+
      if hash update-mime-database 2>/dev/null; then
          update-mime-database /usr/share/mime || true
      fi
@@ -43,8 +52,14 @@ Files to modify:
          update-desktop-database /usr/share/applications || true
      fi
 
+     # Update icon cache
+     if hash gtk-update-icon-cache 2>/dev/null; then
+         gtk-update-icon-cache /usr/share/icons/hicolor -f || true
+     fi
+
   2. package.json (in "build.linux" section)
-     Add desktop.exec with --no-sandbox:
+     Remove AppImage target (deb only). Do NOT use desktop.exec as it creates an
+     invalid lowercase exec= line - the after-install.sh script handles this instead:
 
      "linux": {
        "target": [
@@ -54,10 +69,7 @@ Files to modify:
          }
        ],
        "category": "Development",
-       "maintainer": "WaveSpeed <support@wavespeed.ai>",
-       "desktop": {
-         "exec": "wavespeed-desktop --no-sandbox %U"
-       }
+       "maintainer": "WaveSpeed <support@wavespeed.ai>"
      }
 
 ### Issue 2: libstable-diffusion.so Not Found
