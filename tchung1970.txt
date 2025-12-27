@@ -1,0 +1,60 @@
+Changes made by tchung1970
+==========================
+
+1. Fix Electron sandbox crash on Ubuntu 24.04
+
+   Problem: App crashed with "zygote_host_impl_linux.cc" fatal error on Ubuntu 24.04.
+
+   Cause: Electron sandbox requires either SUID chrome-sandbox or --no-sandbox flag.
+
+   Solution:
+   - build/linux/after-install.sh: Creates wrapper script at /usr/bin/wavespeed-desktop
+     that launches binary with --no-sandbox
+   - package.json: Added desktop.exec with --no-sandbox for GUI launches,
+     removed AppImage target (deb only)
+
+2. Fix libstable-diffusion.so not found
+
+   Problem: SD binary failed with "cannot open shared object file: libstable-diffusion.so"
+
+   Cause: Linux doesn't search the binary's directory for shared libraries by default.
+
+   Solution:
+   - electron/lib/sdGenerator.ts: Set LD_LIBRARY_PATH to binary directory before
+     spawning SD process
+
+3. Build stable-diffusion.cpp with CUDA support
+
+   Problem: Pre-built Linux binary used AVX512 CPU instructions not supported by all CPUs,
+   causing "Illegal instruction" crash. No CUDA build available in releases.
+
+   Solution: Built from source with CUDA:
+
+     sudo apt install nvidia-cuda-toolkit
+     git clone --recursive https://github.com/leejet/stable-diffusion.cpp /tmp/sd-cpp
+     cd /tmp/sd-cpp && mkdir build && cd build
+     cmake .. -DSD_CUDA=ON
+     cmake --build . --config Release -j18
+
+   Installed CUDA binary to: ~/.config/wavespeed-desktop/sd-bin/
+
+   Result: Z-Image now uses RTX 4000 Ada GPU for generation.
+
+4. Update Z-Image GPU acceleration message
+
+   Problem: Message said "CPU only on Linux" which is no longer accurate.
+
+   Solution:
+   - src/pages/ZImagePage.tsx: Changed key from linuxCpuOnly to linuxCudaSupported
+   - src/i18n/locales/*.json (all 18 files): Renamed key and updated message to:
+     "Z-Image uses GPU acceleration when available (CUDA on Linux, Metal on macOS,
+     Vulkan on Windows)."
+
+---
+
+Files modified:
+- build/linux/after-install.sh
+- package.json
+- electron/lib/sdGenerator.ts
+- src/pages/ZImagePage.tsx
+- src/i18n/locales/*.json (18 files)
