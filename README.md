@@ -37,7 +37,7 @@ Download the latest binaries from [Releases](https://github.com/tchung1970/waves
 2. Copy to WaveSpeed Desktop sd-bin directory:
 
 ```bash
-mkdir ~/.config/wavespeed-desktop/sd-bin
+mkdir -p ~/.config/wavespeed-desktop/sd-bin
 cp sd-cli sd-server ~/.config/wavespeed-desktop/sd-bin/
 cp sd-cli ~/.config/wavespeed-desktop/sd-bin/sd
 chmod +x ~/.config/wavespeed-desktop/sd-bin/sd*
