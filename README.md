@@ -2,6 +2,8 @@
 
 Pre-built stable-diffusion.cpp binaries with CUDA support for Linux.
 
+![Z-Image with CUDA on Ubuntu 24.04](tchung-screenshot.png)
+
 ## For WaveSpeed Desktop Developers
 
 See [DEVELOPER-GUIDE.md](DEVELOPER-GUIDE.md) for detailed instructions on:
