@@ -1,10 +1,18 @@
 Command Line Example
 ====================
 
-~/.config/wavespeed-desktop/sd-bin/sd-cli \
+~/.config/wavespeed-desktop/sd-bin/sd \
   --diffusion-model ~/.config/wavespeed-desktop/models/stable-diffusion/z_image_turbo-Q4_K.gguf \
   --vae ~/.config/wavespeed-desktop/models/stable-diffusion/auxiliary/ae.safetensors \
   --llm ~/.config/wavespeed-desktop/models/stable-diffusion/auxiliary/Qwen3-4B-Instruct-2507-UD-Q4_K_XL.gguf \
-  -p "a fancy letter Z"
-
-Output: output.png
+  -p "a fancy letter Z" \
+  -n "blurry, bad quality, low resolution, watermark, distorted, ugly, deformed, extra limbs, poorly drawn, bad anatomy" \
+  -W 1024 -H 1024 \
+  --steps 4 \
+  --cfg-scale 1 \
+  --sampling-method euler \
+  --scheduler simple \
+  --offload-to-cpu \
+  --diffusion-fa \
+  -v \
+  -o output.png
