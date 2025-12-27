@@ -1,0 +1,12 @@
+Command Line Example
+====================
+
+cd ~/.config/wavespeed-desktop/sd-bin
+
+./sd-cli \
+  --diffusion-model ../models/stable-diffusion/z_image_turbo-Q4_K.gguf \
+  --vae ../models/stable-diffusion/auxiliary/ae.safetensors \
+  --llm ../models/stable-diffusion/auxiliary/Qwen3-4B-Instruct-2507-UD-Q4_K_XL.gguf \
+  -p "a fancy letter Z"
+
+Output: output.png
