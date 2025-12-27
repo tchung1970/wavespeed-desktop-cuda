@@ -64,6 +64,16 @@ Changes made by tchung
    - build/linux/after-install.sh: Updates icon cache after installation
    - package.json: Removed desktop.exec (after-install.sh handles this instead)
 
+6. Fix desktop icon showing as generic
+
+   Problem: Application icon in launcher showed generic icon instead of WaveSpeed logo.
+
+   Cause: electron-builder only installs icon to 1024x1024 size, but GNOME needs
+   multiple sizes (48x48, 64x64, 128x128, 256x256, 512x512) to display properly.
+
+   Solution:
+   - build/linux/after-install.sh: Copies icon to multiple sizes after installation
+
 ---
 
 Files modified:

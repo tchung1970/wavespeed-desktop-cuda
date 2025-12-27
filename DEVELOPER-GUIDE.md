@@ -52,6 +52,15 @@ Files to modify:
          update-desktop-database /usr/share/applications || true
      fi
 
+     # Install icon in multiple sizes (electron-builder only installs 1024x1024)
+     ICON_SOURCE='/usr/share/icons/hicolor/1024x1024/apps/${executable}.png'
+     if [ -f "$ICON_SOURCE" ]; then
+         for SIZE in 512x512 256x256 128x128 64x64 48x48; do
+             mkdir -p "/usr/share/icons/hicolor/$SIZE/apps"
+             cp "$ICON_SOURCE" "/usr/share/icons/hicolor/$SIZE/apps/${executable}.png"
+         done
+     fi
+
      # Update icon cache
      if hash gtk-update-icon-cache 2>/dev/null; then
          gtk-update-icon-cache /usr/share/icons/hicolor -f || true
