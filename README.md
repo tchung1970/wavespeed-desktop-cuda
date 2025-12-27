@@ -2,6 +2,14 @@
 
 Pre-built stable-diffusion.cpp binaries with CUDA support for Linux.
 
+## For WaveSpeed Desktop Developers
+
+See [DEVELOPER-GUIDE.md](DEVELOPER-GUIDE.md) for detailed instructions on:
+- Fixing Linux sandbox crash on Ubuntu 24.04
+- Fixing libstable-diffusion.so not found error
+- Adding CUDA support to the official release
+- GitHub Actions workflow for building CUDA binaries
+
 ## Download
 
 Download the latest binaries from [Releases](https://github.com/tchung1970/wavespeed-desktop-cuda/releases).
