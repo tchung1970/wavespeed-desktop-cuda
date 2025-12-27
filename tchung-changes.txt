@@ -1,4 +1,4 @@
-Changes made by tchung1970
+Changes made by tchung
 ==========================
 
 1. Fix Electron sandbox crash on Ubuntu 24.04
