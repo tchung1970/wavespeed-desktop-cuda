@@ -9,8 +9,12 @@ Pre-built stable-diffusion.cpp binaries with CUDA support for Linux.
 See [DEVELOPER-GUIDE.md](DEVELOPER-GUIDE.md) for detailed instructions on:
 - Fixing Linux sandbox crash on Ubuntu 24.04
 - Fixing libstable-diffusion.so not found error
+- Fixing Application Launcher not working
+- Fixing desktop icon showing as generic
 - Adding CUDA support to the official release
 - GitHub Actions workflow for building CUDA binaries
+
+See [tchung-changes.txt](tchung-changes.txt) for a summary of all changes.
 
 ## Download
 
