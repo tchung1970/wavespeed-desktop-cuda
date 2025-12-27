@@ -110,8 +110,8 @@ Solution:
 
 Requirements:
   - Ubuntu 24.04
-  - NVIDIA GPU
-  - NVIDIA driver 580+ with CUDA 12.0+
+  - NVIDIA GPU (for testing, not required for building)
+  - CUDA Toolkit 12.0+
 
 Build commands:
 
@@ -122,8 +122,20 @@ Build commands:
   cmake --build . --config Release -j$(nproc)
 
 Output binaries:
-  /tmp/sd-cpp/build/bin/sd-cli
+  /tmp/sd-cpp/build/bin/sd-cli  (~136MB, statically linked)
   /tmp/sd-cpp/build/bin/sd-server
+
+Note: The CUDA build is statically linked and does NOT require libstable-diffusion.so.
+      The LD_LIBRARY_PATH fix (Issue 2) is only needed for the current AVX512 build.
+
+### Step 1b: Build CPU Fallback (Optional)
+
+For systems without NVIDIA GPU, build a CPU version without AVX512:
+
+  cmake .. -DSD_CUDA=OFF -DCMAKE_CXX_FLAGS="-march=x86-64-v3"
+  cmake --build . --config Release -j$(nproc)
+
+This uses AVX2 instead of AVX512 for broader CPU compatibility.
 
 ### Step 2: Add CUDA Build to GitHub Releases
 
