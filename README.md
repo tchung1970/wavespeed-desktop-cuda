@@ -22,6 +22,7 @@ Download the latest binaries from [Releases](https://github.com/tchung1970/waves
 
 ## Files
 
+- `WaveSpeed-Desktop-linux-amd64.deb` - WaveSpeed Desktop installer
 - `sd-cli` - Command-line image generation tool
 - `sd-server` - Server for image generation
 
