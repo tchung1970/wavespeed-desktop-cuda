@@ -236,8 +236,8 @@ Note: GitHub-hosted runners don't have NVIDIA GPUs, so the build will work but
 ## Summary of All Changes
 
 Files modified:
-  - build/linux/after-install.sh (wrapper script with --no-sandbox)
-  - package.json (desktop.exec with --no-sandbox, optional: remove AppImage)
+  - build/linux/after-install.sh (wrapper script, desktop file fix, icon cache update)
+  - package.json (deb only, removed AppImage and desktop.exec)
   - electron/lib/sdGenerator.ts (LD_LIBRARY_PATH for shared libraries)
   - src/hooks/useZImage.ts (CUDA binary URL selection)
   - src/pages/ZImagePage.tsx (locale key rename)
@@ -256,7 +256,8 @@ After applying these changes:
 4. Navigate to Z-Image and test image generation
 
 Expected behavior:
-  - App launches without sandbox crash
+  - App launches without sandbox crash (both CLI and Application Launcher)
+  - Application Launcher (desktop icon) opens the app correctly
   - Z-Image downloads CUDA binary (if NVIDIA GPU detected)
   - Image generation uses GPU acceleration
 
